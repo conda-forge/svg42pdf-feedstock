@@ -10,7 +10,7 @@ source:
   sha256: 1f1614d52773c86d8b3cf9e0f0baf1d2e081eac3c05b01399c9f8d8c9b222b76
 
 build:
-  number: 1000
+  number: 1001
   entry_points:
     - svg42pdf = svg42pdf:main
   skip: True  # [win]
