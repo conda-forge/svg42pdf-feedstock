@@ -1,34 +1,35 @@
-{% set name = "SVG42PDF" %}
+{% set name = "svg42pdf" %}
 {% set version = "0.2.2" %}
 
+
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/SVG42PDF-{{ version }}.tar.gz
   sha256: 1f1614d52773c86d8b3cf9e0f0baf1d2e081eac3c05b01399c9f8d8c9b222b76
 
 build:
-  number: 1002
+  number: 0
+  noarch: python
   entry_points:
     - svg42pdf = svg42pdf:main
-  skip: True  # [win]
-  skip: True  # [py2k]
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv "
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - cairosvg
+    - python >=3.6
     - pip
-    - python
-    - reportlab
   run:
+    - python >=3.6
     - cairosvg
-    - python
     - reportlab
 
 test:
+  imports:
+    - ext.svg2rlg
+    - svg42pdf
   commands:
     - svg42pdf --help
 
